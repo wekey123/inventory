@@ -1,11 +1,11 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Variant Model
+ * Fulfillment Model
  *
- * @property Order $Order
+ * @property Product $Product
  */
-class Variant extends AppModel {
+class Fulfillment extends AppModel {
 
 /**
  * Validation rules
@@ -13,16 +13,6 @@ class Variant extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'order_id' => array(
-			'numeric' => array(
-				'rule' => array('numeric'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
 		'product_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
@@ -63,19 +53,9 @@ class Variant extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'attribute' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
-				//'message' => 'Your custom message here',
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
-		),
-		'value' => array(
-			'notBlank' => array(
-				'rule' => array('notBlank'),
+		'variant' => array(
+			'boolean' => array(
+				'rule' => array('boolean'),
 				//'message' => 'Your custom message here',
 				//'allowEmpty' => false,
 				//'required' => false,
@@ -93,9 +73,9 @@ class Variant extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Order' => array(
-			'className' => 'Order',
-			'foreignKey' => 'order_id',
+		'Product' => array(
+			'className' => 'Product',
+			'foreignKey' => 'product_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

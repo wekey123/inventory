@@ -239,7 +239,7 @@ class UsersController extends AppController {
 						if($check['User']['privilages'] == 'admin'){
 							$this->Session->write($check);
 							
-							$this->redirect(array('controller'=>'users','action'=>'index','admin'=>true));
+							$this->redirect(array('controller'=>'products','action'=>'index','admin'=>false));
 						}
 						else
 							$this->Session->setFlash("<div class='error msg'>Account suspended.</div>,Sorry. Your account has been suspended by site admin.",'');
