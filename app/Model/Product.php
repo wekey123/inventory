@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Product Model
  *
  * @property User $User
- * @property Invetory $Invetory
+ * @property Inventory $Inventory
  * @property Variant $Variant
  */
 class Product extends AppModel {
@@ -227,8 +227,8 @@ class Product extends AppModel {
  * @var array
  */
 	public $hasMany = array(
-		'Invetory' => array(
-			'className' => 'Invetory',
+		'Inventory' => array(
+			'className' => 'Inventory',
 			'foreignKey' => 'product_id',
 			'dependent' => false,
 			'conditions' => '',

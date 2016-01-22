@@ -1,13 +1,13 @@
 <?php
 App::uses('AppModel', 'Model');
 /**
- * Invetory Model
+ * Inventory Model
  *
  * @property User $User
  * @property Product $Product
  * @property Variant $Variant
  */
-class Invetory extends AppModel {
+class Inventory extends AppModel {
 
 /**
  * Validation rules
@@ -119,7 +119,7 @@ class Invetory extends AppModel {
 	public $hasMany = array(
 		'Variant' => array(
 			'className' => 'Variant',
-			'foreignKey' => 'invetory_id',
+			'foreignKey' => 'inventory_id',
 			'dependent' => false,
 			'conditions' => '',
 			'fields' => '',

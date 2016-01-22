@@ -17,7 +17,7 @@ class ProductsController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 	public $layout = 'admin';
-	public $uses = array('Product','Invetory','Variant');
+	public $uses = array('Product','Inventory','Variant');
 /**
  * index method
  *
@@ -30,21 +30,21 @@ class ProductsController extends AppController {
 		$this->Product->recursive = 1;
 		$Products = $this->Product->find('all');	
 		foreach($Products as $product) {
-			foreach($product['Invetory'] as $Invetory) {
-			 if($Invetory['type'] == 'order'){
-				 $product['Product']['order_qty'] += $Invetory['quantity'];
-				 $product['Product']['order_purchase_price'] += $Invetory['purchase_price']*$Invetory['quantity'];
-				 $product['Product']['order_sale_price'] += $Invetory['sale_price']*$Invetory['quantity'];
+			foreach($product['Inventory'] as $Inventory) {
+			 if($Inventory['type'] == 'order'){
+				 $product['Product']['order_qty'] += $Inventory['quantity'];
+				 $product['Product']['order_purchase_price'] += $Inventory['purchase_price']*$Inventory['quantity'];
+				 $product['Product']['order_sale_price'] += $Inventory['sale_price']*$Inventory['quantity'];
 			 }
-			 if($Invetory['type'] == 'fulfillment'){
-				 $product['Product']['fulfill_qty'] += $Invetory['quantity'];
-				 $product['Product']['fulfill_purchase_price'] += $Invetory['purchase_price']*$Invetory['quantity'];
-				 $product['Product']['fulfill_sale_price'] += $Invetory['sale_price']*$Invetory['quantity'];
+			 if($Inventory['type'] == 'fulfillment'){
+				 $product['Product']['fulfill_qty'] += $Inventory['quantity'];
+				 $product['Product']['fulfill_purchase_price'] += $Inventory['purchase_price']*$Inventory['quantity'];
+				 $product['Product']['fulfill_sale_price'] += $Inventory['sale_price']*$Inventory['quantity'];
 			 }
-			 if($Invetory['type'] == 'sale'){
-				 $product['Product']['sale_qty'] += $Invetory['quantity'];
-				 $product['Product']['sale_purchase_price'] += $Invetory['purchase_price']*$Invetory['quantity'];
-				 $product['Product']['sale_sale_price'] += $Invetory['sale_price']*$Invetory['quantity'];
+			 if($Inventory['type'] == 'sale'){
+				 $product['Product']['sale_qty'] += $Inventory['quantity'];
+				 $product['Product']['sale_purchase_price'] += $Inventory['purchase_price']*$Inventory['quantity'];
+				 $product['Product']['sale_sale_price'] += $Inventory['sale_price']*$Inventory['quantity'];
 			 }
 			}
 			$result[] = $product;

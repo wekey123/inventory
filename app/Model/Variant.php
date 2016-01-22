@@ -4,7 +4,7 @@ App::uses('AppModel', 'Model');
  * Variant Model
  *
  * @property User $User
- * @property Invetory $Invetory
+ * @property Inventory $Inventory
  * @property Product $Product
  */
 class Variant extends AppModel {
@@ -25,7 +25,7 @@ class Variant extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'invetory_id' => array(
+		'inventory_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -115,9 +115,9 @@ class Variant extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Invetory' => array(
-			'className' => 'Invetory',
-			'foreignKey' => 'invetory_id',
+		'Inventory' => array(
+			'className' => 'Inventory',
+			'foreignKey' => 'inventory_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

@@ -3,7 +3,7 @@ App::uses('AppModel', 'Model');
 /**
  * User Model
  *
- * @property Invetory $Invetory
+ * @property Inventory $Inventory
  * @property Product $Product
  * @property Variant $Variant
  */

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 22, 2016 at 08:03 AM
+-- Generation Time: Jan 22, 2016 at 09:59 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -23,10 +23,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `invetories`
+-- Table structure for table `inventories`
 --
 
-CREATE TABLE IF NOT EXISTS `invetories` (
+CREATE TABLE IF NOT EXISTS `inventories` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
@@ -41,10 +41,10 @@ CREATE TABLE IF NOT EXISTS `invetories` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `invetories`
+-- Dumping data for table `inventories`
 --
 
-INSERT INTO `invetories` (`id`, `user_id`, `product_id`, `quantity`, `purchase_price`, `sale_price`, `variant`, `type`, `created`, `modified`) VALUES
+INSERT INTO `inventories` (`id`, `user_id`, `product_id`, `quantity`, `purchase_price`, `sale_price`, `variant`, `type`, `created`, `modified`) VALUES
 (1, 1, 1, 15, '6.00', '24.00', 1, 'order', '2016-01-21 09:50:32', '2016-01-21 09:50:32'),
 (2, 1, 1, 5, '6.00', '24.00', 1, 'fulfillment', '2016-01-21 09:52:56', '2016-01-21 09:52:56'),
 (3, 1, 1, 3, '6.00', '24.00', 1, 'fulfillment', '2016-01-21 09:52:56', '2016-01-21 09:52:56'),
@@ -127,7 +127,7 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `phone`, `email`, `passwor
 CREATE TABLE IF NOT EXISTS `variants` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `invetory_id` int(11) NOT NULL,
+  `inventory_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `purchase_price` decimal(10,2) NOT NULL,
@@ -144,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `variants` (
 -- Dumping data for table `variants`
 --
 
-INSERT INTO `variants` (`id`, `user_id`, `invetory_id`, `product_id`, `quantity`, `purchase_price`, `sale_price`, `attribute`, `value`, `type`, `created_at`, `modified_At`) VALUES
+INSERT INTO `variants` (`id`, `user_id`, `inventory_id`, `product_id`, `quantity`, `purchase_price`, `sale_price`, `attribute`, `value`, `type`, `created_at`, `modified_At`) VALUES
 (1, 1, 1, 1, 3, '6.00', '24.00', 'black', 'small', '', '2016-01-19 12:13:41', '2016-01-19 12:13:41'),
 (2, 1, 1, 1, 7, '7.00', '24.00', 'black', 'medium', '', '2016-01-19 12:13:41', '2016-01-19 12:13:41');
 
