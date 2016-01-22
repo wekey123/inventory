@@ -3,7 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * Variant Model
  *
- * @property Order $Order
+ * @property User $User
+ * @property Invetory $Invetory
+ * @property Product $Product
  */
 class Variant extends AppModel {
 
@@ -13,7 +15,17 @@ class Variant extends AppModel {
  * @var array
  */
 	public $validate = array(
-		'order_id' => array(
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
+		'invetory_id' => array(
 			'numeric' => array(
 				'rule' => array('numeric'),
 				//'message' => 'Your custom message here',
@@ -83,6 +95,16 @@ class Variant extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+		'type' => array(
+			'notBlank' => array(
+				'rule' => array('notBlank'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 	);
 
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
@@ -93,9 +115,9 @@ class Variant extends AppModel {
  * @var array
  */
 	public $belongsTo = array(
-		'Order' => array(
-			'className' => 'Order',
-			'foreignKey' => 'order_id',
+		'Invetory' => array(
+			'className' => 'Invetory',
+			'foreignKey' => 'invetory_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''

@@ -3,9 +3,9 @@ App::uses('AppModel', 'Model');
 /**
  * Product Model
  *
- * @property Fulfillment $Fulfillment
- * @property Order $Order
- * @property Sale $Sale
+ * @property User $User
+ * @property Invetory $Invetory
+ * @property Variant $Variant
  */
 class Product extends AppModel {
 
@@ -22,6 +22,16 @@ class Product extends AppModel {
  * @var array
  */
 	public $validate = array(
+		'user_id' => array(
+			'numeric' => array(
+				'rule' => array('numeric'),
+				//'message' => 'Your custom message here',
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'title' => array(
 			'notBlank' => array(
 				'rule' => array('notBlank'),
@@ -197,39 +207,28 @@ class Product extends AppModel {
 	// The Associations below have been created with all possible keys, those that are not needed can be removed
 
 /**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'User' => array(
+			'className' => 'User',
+			'foreignKey' => 'user_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+
+/**
  * hasMany associations
  *
  * @var array
  */
 	public $hasMany = array(
-		'Fulfillment' => array(
-			'className' => 'Fulfillment',
-			'foreignKey' => 'product_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Order' => array(
-			'className' => 'Order',
-			'foreignKey' => 'product_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'Sale' => array(
-			'className' => 'Sale',
+		'Invetory' => array(
+			'className' => 'Invetory',
 			'foreignKey' => 'product_id',
 			'dependent' => false,
 			'conditions' => '',

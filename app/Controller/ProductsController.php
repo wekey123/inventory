@@ -17,42 +17,41 @@ class ProductsController extends AppController {
  */
 	public $components = array('Paginator', 'Flash', 'Session');
 	public $layout = 'admin';
-
+	public $uses = array('Product','Invetory','Variant');
 /**
  * index method
  *
  * @return void
  */
+	
 	public function index() {
+				
 		$this->layout = 'adminhome';
 		$this->Product->recursive = 1;
-		$Products = $this->Product->find('all');
-		//debug($Products);
+		$Products = $this->Product->find('all');	
 		foreach($Products as $product) {
-			
-			foreach($product['Order'] as $Order) {
-			 $product['Product']['order_qty'] += $Order['quantity'];
-			 $product['Product']['order_purchase_price'] += $Order['purchase_price']*$Order['quantity'];
-			 $product['Product']['order_sale_price'] += $Order['sale_price']*$Order['quantity'];
-			}
-			
-			foreach($product['Fulfillment'] as $Fulfillment) {
-			 $product['Product']['fulfill_qty'] += $Fulfillment['quantity'];
-			 $product['Product']['fulfill_purchase_price'] += $Fulfillment['purchase_price']*$Fulfillment['quantity'];
-			 $product['Product']['fulfill_sale_price'] += $Fulfillment['sale_price']*$Fulfillment['quantity'];
-			}
-			
-			foreach($product['Sale'] as $Sale) {
-			 $product['Product']['sale_qty'] += $Sale['quantity'];
-			 $product['Product']['sale_purchase_price'] += $Sale['purchase_price']*$Sale['quantity'];
-			 $product['Product']['sale_sale_price'] += $Sale['sale_price']*$Sale['quantity'];
+			foreach($product['Invetory'] as $Invetory) {
+			 if($Invetory['type'] == 'order'){
+				 $product['Product']['order_qty'] += $Invetory['quantity'];
+				 $product['Product']['order_purchase_price'] += $Invetory['purchase_price']*$Invetory['quantity'];
+				 $product['Product']['order_sale_price'] += $Invetory['sale_price']*$Invetory['quantity'];
+			 }
+			 if($Invetory['type'] == 'fulfillment'){
+				 $product['Product']['fulfill_qty'] += $Invetory['quantity'];
+				 $product['Product']['fulfill_purchase_price'] += $Invetory['purchase_price']*$Invetory['quantity'];
+				 $product['Product']['fulfill_sale_price'] += $Invetory['sale_price']*$Invetory['quantity'];
+			 }
+			 if($Invetory['type'] == 'sale'){
+				 $product['Product']['sale_qty'] += $Invetory['quantity'];
+				 $product['Product']['sale_purchase_price'] += $Invetory['purchase_price']*$Invetory['quantity'];
+				 $product['Product']['sale_sale_price'] += $Invetory['sale_price']*$Invetory['quantity'];
+			 }
 			}
 			$result[] = $product;
 		}
-		//debug($result);
-		//exit;
 		$this->set('products',$result);
 	}
+
 
 /**
  * view method
@@ -62,11 +61,19 @@ class ProductsController extends AppController {
  * @return void
  */
 	public function view($id = null) {
+		$this->layout = 'admin';
+		
+		//exit;
+		
 		if (!$this->Product->exists($id)) {
 			throw new NotFoundException(__('Invalid product'));
 		}
 		$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
+		$prod  = $this->Product->find('first', $options); 
+		debug($prod); 
+		exit;
 		$this->set('product', $this->Product->find('first', $options));
+		
 	}
 
 /**
@@ -84,6 +91,8 @@ class ProductsController extends AppController {
 				$this->Flash->error(__('The product could not be saved. Please, try again.'));
 			}
 		}
+		$users = $this->Product->User->find('list');
+		$this->set(compact('users'));
 	}
 
 /**
@@ -108,6 +117,8 @@ class ProductsController extends AppController {
 			$options = array('conditions' => array('Product.' . $this->Product->primaryKey => $id));
 			$this->request->data = $this->Product->find('first', $options);
 		}
+		$users = $this->Product->User->find('list');
+		$this->set(compact('users'));
 	}
 
 /**
